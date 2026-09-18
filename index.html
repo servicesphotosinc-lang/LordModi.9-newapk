@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LordModi.9 - Download</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#090014,#16002e,#00152e);
+  color:white;
+  padding:20px 14px 40px;
+}
+
+.container{
+  max-width:500px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin:10px 0 22px;
+}
+
+.logo{
+  width:70px;
+  height:70px;
+  margin:auto;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  font-weight:bold;
+  background:linear-gradient(135deg,#ff1744,#7c4dff,#00e5ff);
+  box-shadow:0 0 30px #7c4dff88;
+}
+
+h1{
+  margin-top:12px;
+  font-size:27px;
+}
+
+.subtitle{
+  color:#bdb7ca;
+  margin-top:6px;
+  font-size:14px;
+}
+
+.progress-box{
+  background:#ffffff0d;
+  border:1px solid #ffffff18;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:#cfc9d8;
+  margin-bottom:8px;
+}
+
+.progress{
+  height:7px;
+  background:#ffffff18;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff1744,#7c4dff,#00e5ff);
+  border-radius:20px;
+  transition:.5s;
+}
+
+.card{
+  position:relative;
+  background:linear-gradient(145deg,#ffffff12,#ffffff06);
+  border:1px solid #ffffff1c;
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 10px 35px #00000035;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:#7c4dff;
+  filter:blur(70px);
+  opacity:.18;
+  right:-50px;
+  top:-50px;
+}
+
+.task-top{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.icon{
+  width:50px;
+  height:50px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  background:#ffffff12;
+}
+
+.task-title{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.task-desc{
+  color:#aaa3b4;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.open-btn,.confirm-btn,.download-btn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:14px;
+  margin-top:17px;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.open-btn{
+  background:linear-gradient(90deg,#ff1744,#ff4d6d);
+}
+
+.confirm-btn{
+  background:linear-gradient(90deg,#6c35ff,#00a8ff);
+}
+
+.download-btn{
+  background:linear-gradient(90deg,#00c853,#00e5ff);
+  font-size:17px;
+  box-shadow:0 0 25px #00e5ff44;
+}
+
+button:active{
+  transform:scale(.97);
+}
+
+.timer{
+  text-align:center;
+  color:#00e5ff;
+  font-weight:bold;
+  margin-top:14px;
+  display:none;
+}
+
+.status{
+  text-align:center;
+  color:#70ff9a;
+  font-size:13px;
+  margin-top:12px;
+  display:none;
+}
+
+.locked{
+  opacity:.45;
+  pointer-events:none;
+}
+
+.password-box{
+  display:none;
+  text-align:center;
+}
+
+.password-box h2{
+  font-size:21px;
+  margin-bottom:8px;
+}
+
+.password-box p{
+  color:#aaa3b4;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.password-input{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #ffffff22;
+  background:#ffffff0d;
+  color:white;
+  text-align:center;
+  font-size:22px;
+  letter-spacing:8px;
+  outline:none;
+}
+
+.error{
+  color:#ff6680;
+  font-size:13px;
+  margin-top:10px;
+  display:none;
+}
+
+.footer{
+  text-align:center;
+  color:#777180;
+  font-size:12px;
+  margin-top:25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">LM</div>
+    <h1>LordModi.9</h1>
+    <div class="subtitle">Complete the tasks to unlock your download</div>
+  </div>
+
+  <div class="progress-box">
+    <div class="progress-text">
+      <span>Progress</span>
+      <span id="progressText">0 / 3</span>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE -->
+  <div class="card" id="youtubeCard">
+    <div class="task-top">
+      <div class="icon">▶️</div>
+      <div>
+        <div class="task-title">YouTube</div>
+        <div class="task-desc">Subscribe to our YouTube channel</div>
+      </div>
+    </div>
+
+    <button class="open-btn" id="youtubeOpen"
+      onclick="openTask('youtube')">
+      OPEN YOUTUBE
+    </button>
+
+    <button class="confirm-btn" id="youtubeConfirm"
+      onclick="confirmTask('youtube')" style="display:none">
+      I'VE SUBSCRIBED
+    </button>
+
+    <div class="timer" id="youtubeTimer"></div>
+    <div class="status" id="youtubeStatus">✓ YouTube task completed</div>
+  </div>
+
+  <!-- TELEGRAM -->
+  <div class="card locked" id="telegramCard">
+    <div class="task-top">
+      <div class="icon">✈️</div>
+      <div>
+        <div class="task-title">Telegram</div>
+        <div class="task-desc">Join our Telegram channel</div>
+      </div>
+    </div>
+
+    <button class="open-btn" id="telegramOpen"
+      onclick="openTask('telegram')">
+      OPEN TELEGRAM
+    </button>
+
+    <button class="confirm-btn" id="telegramConfirm"
+      onclick="confirmTask('telegram')" style="display:none">
+      I'VE JOINED
+    </button>
+
+    <div class="timer" id="telegramTimer"></div>
+    <div class="status" id="telegramStatus">✓ Telegram task completed</div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="card locked" id="instagramCard">
+    <div class="task-top">
+      <div class="icon">📸</div>
+      <div>
+        <div class="task-title">Instagram</div>
+        <div class="task-desc">Follow our Instagram profile</div>
+      </div>
+    </div>
+
+    <button class="open-btn" id="instagramOpen"
+      onclick="openTask('instagram')">
+      OPEN INSTAGRAM
+    </button>
+
+    <button class="confirm-btn" id="instagramConfirm"
+      onclick="confirmTask('instagram')" style="display:none">
+      I FOLLOWED
+    </button>
+
+    <div class="timer" id="instagramTimer"></div>
+    <div class="status" id="instagramStatus">✓ Instagram task completed</div>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="card password-box" id="passwordCard">
+    <h2>🔐 Final Verification</h2>
+    <p>Enter the 4-digit password to unlock the download.</p>
+
+    <input
+      class="password-input"
+      id="password"
+      type="password"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="••••"
+    >
+
+    <button class="download-btn" onclick="checkPassword()">
+      UNLOCK DOWNLOAD
+    </button>
+
+    <div class="error" id="passwordError">
+      Incorrect password. Please try again.
+    </div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <div class="card" id="downloadCard" style="display:none;text-align:center">
+    <div style="font-size:45px">🎉</div>
+    <h2 style="margin-top:8px">Download Unlocked!</h2>
+    <p style="color:#aaa3b4;font-size:13px;margin-top:7px">
+      All tasks completed successfully.
+    </p>
+
+    <!-- APK LINK BAAD MEIN YAHAN ADD KARNA -->
+    <a id="downloadLink"
+       href="#"
+       style="text-decoration:none">
+      <button class="download-btn">
+        ⬇️ DOWNLOAD APK
+      </button>
+    </a>
+  </div>
+
+  <div class="footer">
+    © 2026 LordModi.9 • All rights reserved
+  </div>
+
+</div>
+
+<script>
+
+const links = {
+  youtube: "https://youtube.com/@lordmodi.9?si=w83JvXw2f1Wk5C8p",
+  telegram: "https://t.me/lordmodi1920",
+  instagram: "https://www.instagram.com/dileepsingh__rathore?stkn=Y2duY3AxYWQ3Z2Q4&utm_source=qr"
+};
+
+let completed = 0;
+
+function openTask(task){
+
+  window.open(links[task], "_blank");
+
+  document.getElementById(task+"Open").style.display="none";
+  document.getElementById(task+"Confirm").style.display="block";
+}
+
+function confirmTask(task){
+
+  const timer = document.getElementById(task+"Timer");
+  const confirm = document.getElementById(task+"Confirm");
+
+  confirm.disabled = true;
+  timer.style.display="block";
+
+  let seconds = 10;
+  timer.innerHTML = "Please wait " + seconds + " seconds...";
+
+  const interval = setInterval(()=>{
+
+    seconds--;
+
+    if(seconds > 0){
+      timer.innerHTML = "Please wait " + seconds + " seconds...";
+    }else{
+
+      clearInterval(interval);
+
+      timer.innerHTML = "✓ Verification complete";
+      document.getElementById(task+"Status").style.display="block";
+      confirm.style.display="none";
+
+      completed++;
+
+      updateProgress();
+
+      unlockNext(task);
+    }
+
+  },1000);
+}
+
+function unlockNext(task){
+
+  if(task === "youtube"){
+    document.getElementById("telegramCard").classList.remove("locked");
+  }
+
+  if(task === "telegram"){
+    document.getElementById("instagramCard").classList.remove("locked");
+  }
+
+  if(task === "instagram"){
+    document.getElementById("passwordCard").style.display="block";
+    document.getElementById("passwordCard").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+  }
+}
+
+function updateProgress(){
+
+  document.getElementById("progressText").innerHTML =
+    completed + " / 3";
+
+  document.getElementById("progressBar").style.width =
+    ((completed / 3) * 100) + "%";
+}
+
+function checkPassword(){
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("passwordError");
+
+  if(password === "9929"){
+
+    error.style.display="none";
+
+    document.getElementById("passwordCard").style.display="none";
+    document.getElementById("downloadCard").style.display="block";
+
+    document.getElementById("downloadCard").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }else{
+
+    error.style.display="block";
+    document.getElementById("password").value="";
+  }
+}
+
+</script>
+
+</body>
+</html>
